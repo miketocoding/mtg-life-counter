@@ -1,21 +1,37 @@
+/* One theme for the whole app: parchment and gold like a white card's frame,
+   a card's black border between player panels, and soft mana colours for
+   the players. */
 :root {
-  --red: #fca5a5;
-  --blue: #93c5fd;
-  --yellow: #fde68a;
-  --green: #86efac;
-  --bg: #111113;
-  --surface: #1e1e22;
-  --surface-raised: #2c2c32;
-  --text: #f4f4f5;
-  --text-muted: #a1a1aa;
-  --accent: #f4f4f5;
-  --on-accent: #000;
-  --danger: #f87171;
-  --mana-w: #f8f1c8;
-  --mana-u: #b5d8ef;
-  --mana-b: #cbc2bd;
-  --mana-r: #f2b096;
-  --mana-g: #a9d4b4;
+  --bg: #1c1610;
+  --paper: #f5ecd7;
+  --surface: #ebdfc2;
+  --surface-raised: #fffaf0;
+  --text: #2a2118;
+  --text-muted: #6b5c48;
+  --title: #5a3f17;
+  --accent: #8f6421;
+  --on-accent: #fffaf0;
+  --danger: #b42318;
+
+  /* Mana colours: light tints of the printed mana symbols. White sits a
+     step lighter so it reads as cream, not khaki. */
+  --mana-w: #eddea9;
+  --mana-u: #92c4ee;
+  --mana-b: #d3c8c2;
+  --mana-r: #f8a49d;
+  --mana-g: #a1cfa1;
+
+  /* Player colours, in Magic's WUBRG order with black skipped, so each
+     added player adds the next colour: W, then U, R, G. The phone's owner
+     always gets the first. */
+  --colour-1: var(--mana-w);
+  --colour-2: var(--mana-u);
+  --colour-3: var(--mana-r);
+  --colour-4: var(--mana-g);
+
+  /* Cinzel stands in for Beleren, the card-name face, which isn't free. */
+  --font-display: Cinzel, Georgia, 'Times New Roman', serif;
+  --font-numbers: 'Alegreya Sans', system-ui, sans-serif;
   --menu-size: 11vmin;
 
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -60,12 +76,25 @@ button {
 
 /* ---------- Game ---------- */
 
+/* The dark --bg around the panels is a card's black border, and the panels
+   have a card's rounded corners. */
 .game {
   position: fixed;
   inset: 0;
   display: grid;
-  gap: 0.6vmin;
+  gap: 2vmin;
+  padding: 2vmin;
   background: var(--bg);
+}
+
+.game--1 {
+  --life-size: min(48vw, 34dvh);
+}
+
+/* With one panel, the screen's centre is the life total, so the menu
+   button moves up to the top edge. */
+.game--1 .menu-button {
+  top: calc(max(4vmin, env(safe-area-inset-top)) + var(--menu-size) / 2);
 }
 
 .game--2 {
@@ -87,20 +116,21 @@ button {
   position: relative;
   overflow: hidden;
   container-type: size;
-  color: #000;
+  border-radius: 3vmin;
+  color: var(--text);
 }
 
-.panel--player-1 {
-  background: var(--red);
+.panel--colour-1 {
+  background: var(--colour-1);
 }
-.panel--player-2 {
-  background: var(--blue);
+.panel--colour-2 {
+  background: var(--colour-2);
 }
-.panel--player-3 {
-  background: var(--yellow);
+.panel--colour-3 {
+  background: var(--colour-3);
 }
-.panel--player-4 {
-  background: var(--green);
+.panel--colour-4 {
+  background: var(--colour-4);
 }
 
 /* Everything inside a panel is laid out for an upright player, then the
@@ -142,7 +172,7 @@ button {
   padding: 0;
   border: 0;
   background: transparent;
-  color: #000;
+  color: var(--text);
   cursor: pointer;
 }
 .zone--minus {
@@ -155,7 +185,7 @@ button {
   background: rgb(0 0 0 / 0.07);
 }
 .zone:focus-visible {
-  outline: 0.6vmin solid #000;
+  outline: 0.6vmin solid var(--text);
   outline-offset: -1.2vmin;
 }
 
@@ -186,11 +216,11 @@ button {
 
 .life {
   position: relative;
+  font-family: var(--font-numbers);
   font-size: var(--life-size);
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
 .delta {
@@ -238,11 +268,11 @@ button {
   transform: translate(-50%, -50%);
   border: 0.6vmin solid var(--bg);
   border-radius: 50%;
-  background: var(--surface-raised);
+  background: var(--accent);
   cursor: pointer;
 }
 .menu-button:focus-visible {
-  outline: 0.6vmin solid var(--accent);
+  outline: 0.6vmin solid var(--paper);
 }
 
 .menu-button__bars,
@@ -253,7 +283,7 @@ button {
   width: 4.2vmin;
   height: 0.6vmin;
   border-radius: 1vmin;
-  background: var(--text);
+  background: var(--on-accent);
   transform: translate(-50%, -50%);
 }
 .menu-button__bars {
@@ -277,7 +307,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgb(0 0 0 / 0.65);
+  background: rgb(28 22 16 / 0.62);
 }
 
 .dialog {
@@ -287,7 +317,19 @@ button {
   width: min(78vw, 70dvh);
   padding: 5vmin;
   border-radius: 4vmin;
-  background: var(--surface);
+  background: var(--paper);
+  color: var(--text);
+  box-shadow: inset 0 0 0 0.4vmin var(--accent);
+}
+
+.dialog__title {
+  margin: 0 0 1vmin;
+  font-family: var(--font-display);
+  font-size: 6vmin;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: var(--title);
 }
 
 .dialog__text {
@@ -303,13 +345,13 @@ button {
   padding: 3.4vmin 4vmin;
   border: 0;
   border-radius: 2.5vmin;
-  background: var(--surface-raised);
+  background: var(--surface);
   font-size: 4.6vmin;
   font-weight: 600;
   cursor: pointer;
 }
 .button:active {
-  filter: brightness(1.25);
+  filter: brightness(0.92);
 }
 .button:focus-visible,
 .choice:focus-visible {
@@ -322,7 +364,7 @@ button {
 }
 .button--danger {
   background: var(--danger);
-  color: #000;
+  color: var(--on-accent);
 }
 .button--primary {
   background: var(--accent);
@@ -335,19 +377,7 @@ button {
 
 /* ---------- Setup ---------- */
 
-/* The setup screen is parchment and gold, like a white card's frame; the
-   game screen and its menu stay dark. */
 .setup {
-  --bg: #f5ecd7;
-  --surface: #ebdfc2;
-  --surface-raised: #fffaf0;
-  --text: #2a2118;
-  --text-muted: #6b5c48;
-  --title: #5a3f17;
-  --accent: #8f6421;
-  --on-accent: #fffaf0;
-  --danger: #b42318;
-
   position: fixed;
   inset: 0;
   display: flex;
@@ -355,7 +385,7 @@ button {
   justify-content: center;
   padding: max(5vmin, env(safe-area-inset-top)) 6vmin
     max(5vmin, env(safe-area-inset-bottom));
-  background: var(--bg);
+  background: var(--paper);
   color: var(--text);
 }
 
@@ -398,8 +428,7 @@ button {
 
 .setup__title {
   margin: 0;
-  /* Cinzel stands in for Beleren, the card-name face, which isn't free. */
-  font-family: Cinzel, Georgia, 'Times New Roman', serif;
+  font-family: var(--font-display);
   font-size: min(9vmin, 6dvh);
   font-weight: 700;
   letter-spacing: 0.03em;
@@ -476,17 +505,17 @@ button {
   border-radius: 50%;
   box-shadow: inset 0 0 0 0.3vmin rgb(0 0 0 / 0.2);
 }
-.seats__dot--player-1 {
-  background: var(--red);
+.seats__dot--colour-1 {
+  background: var(--colour-1);
 }
-.seats__dot--player-2 {
-  background: var(--blue);
+.seats__dot--colour-2 {
+  background: var(--colour-2);
 }
-.seats__dot--player-3 {
-  background: var(--yellow);
+.seats__dot--colour-3 {
+  background: var(--colour-3);
 }
-.seats__dot--player-4 {
-  background: var(--green);
+.seats__dot--colour-4 {
+  background: var(--colour-4);
 }
 
 .custom {

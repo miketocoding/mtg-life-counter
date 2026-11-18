@@ -11,6 +11,8 @@ interface PlayerPanelProps {
   player: number
   life: number
   orientation: Orientation
+  // 1–4: which player colour the panel uses.
+  colour: number
   onChange: (amount: number) => void
 }
 
@@ -24,6 +26,7 @@ export function PlayerPanel({
   player,
   life,
   orientation,
+  colour,
   onChange,
 }: PlayerPanelProps) {
   const [delta, setDelta] = useState({ value: 0, fading: true })
@@ -53,7 +56,7 @@ export function PlayerPanel({
 
   return (
     <section
-      className={`panel panel--${orientation} panel--player-${player + 1}`}
+      className={`panel panel--${orientation} panel--colour-${colour}`}
       aria-label={`Player ${player + 1}`}
     >
       <div className="panel__inner">

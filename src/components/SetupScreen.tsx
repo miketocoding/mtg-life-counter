@@ -54,7 +54,7 @@ export function SetupScreen({ state, dispatch }: SetupScreenProps) {
                   {Array.from({ length: count }, (_, seat) => (
                     <span
                       key={seat}
-                      className={`seats__dot seats__dot--player-${seat + 1}`}
+                      className={`seats__dot seats__dot--colour-${seat + 1}`}
                     />
                   ))}
                 </span>

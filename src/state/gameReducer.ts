@@ -1,4 +1,5 @@
-export type PlayerCount = 2 | 3 | 4
+// 1 is for a player whose opponents track their own life elsewhere.
+export type PlayerCount = 1 | 2 | 3 | 4
 export type Screen = 'setup' | 'game'
 // Which edge of the phone the third (sideways) player sits at in a 3-player game.
 export type SideSeat = 'left' | 'right'
@@ -18,7 +19,7 @@ export type GameAction =
   | { type: 'NEW_GAME' }
   | { type: 'SET_SIDE_SEAT'; sideSeat: SideSeat }
 
-export const PLAYER_COUNTS: readonly PlayerCount[] = [2, 3, 4]
+export const PLAYER_COUNTS: readonly PlayerCount[] = [1, 2, 3, 4]
 export const LIFE_PRESETS: readonly number[] = [20, 25, 30, 40]
 export const DEFAULT_STARTING_LIFE = 20
 export const MIN_STARTING_LIFE = 1

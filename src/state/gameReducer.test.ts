@@ -30,6 +30,15 @@ describe('gameReducer', () => {
       })
     })
 
+    it('starts a one-player game with a single life total', () => {
+      const state = gameReducer(initialState, {
+        type: 'START_GAME',
+        playerCount: 1,
+        startingLife: 40,
+      })
+      expect(state).toMatchObject({ screen: 'game', playerCount: 1, life: [40] })
+    })
+
     it('keeps the side seat setting', () => {
       const state = gameReducer(
         { ...initialState, sideSeat: 'right' },

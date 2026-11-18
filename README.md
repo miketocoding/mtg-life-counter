@@ -1,13 +1,17 @@
 # MTG Life Counter
 
 A phone-first life counter for Magic: The Gathering, meant to lie flat on the
-table. Supports 2, 3 or 4 players, each panel rotated to face its player.
+table. Supports 1 to 4 players, each panel rotated to face its player. The
+1-player mode lets you track your own life when your opponents use their
+own counters.
 See [SPEC.md](SPEC.md) for the full behaviour.
 
 - Tap the left half of your panel for -1, the right half for +1.
 - Press and hold to change by 5, repeating while held.
-- The button in the centre of the screen opens the menu (Reset, New Game and,
-  with 3 players, which edge the side player sits at).
+- The phone's owner always gets the cream panel at the bottom.
+- The gold button in the centre of the screen (at the top with 1 player)
+  opens the menu (Reset, New Game and, with 3 players, which edge the side
+  player sits at).
 
 ## Development
 

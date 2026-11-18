@@ -11,12 +11,12 @@ function App() {
   useEffect(() => saveState(state), [state])
   useWakeLock(state.screen === 'game')
 
-  // Match the browser bar to the screen: the setup screen's light --bg,
-  // or the game screen's dark one.
+  // Match the browser bar to the screen: the setup screen's --paper, or the
+  // game screen's --bg.
   useEffect(() => {
     document
       .querySelector('meta[name="theme-color"]')
-      ?.setAttribute('content', state.screen === 'setup' ? '#f5ecd7' : '#111113')
+      ?.setAttribute('content', state.screen === 'setup' ? '#f5ecd7' : '#1c1610')
   }, [state.screen])
 
   return state.screen === 'setup' ? (

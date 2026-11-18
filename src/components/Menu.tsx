@@ -39,10 +39,12 @@ export function Menu({
             className="dialog"
             role="dialog"
             aria-modal="true"
+            aria-label="Menu"
             onClick={(event) => event.stopPropagation()}
           >
             {view === 'menu' && (
               <>
+                <h2 className="dialog__title">Menu</h2>
                 <button
                   type="button"
                   className="button"

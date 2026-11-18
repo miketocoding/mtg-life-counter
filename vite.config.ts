@@ -10,7 +10,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
-      // Precache the bundled title font too, so it works offline.
+      // Precache the bundled fonts too, so they work offline.
       workbox: { globPatterns: ['**/*.{js,css,html,woff2}'] },
       manifest: {
         name: 'MTG Life Counter',
@@ -18,8 +18,8 @@ export default defineConfig({
         description: 'A phone-first life counter for Magic: The Gathering.',
         display: 'fullscreen',
         orientation: 'portrait',
-        background_color: '#111113',
-        theme_color: '#111113',
+        background_color: '#f5ecd7',
+        theme_color: '#1c1610',
         icons: [
           { src: 'icon-192.png', sizes: '192x192', type: 'image/png' },
           { src: 'icon-512.png', sizes: '512x512', type: 'image/png' },
