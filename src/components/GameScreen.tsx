@@ -63,6 +63,10 @@ export function GameScreen({ state, dispatch }: GameScreenProps) {
       <Menu
         startingLife={state.startingLife}
         sideSeat={state.playerCount === 3 ? state.sideSeat : undefined}
+        keepAwake={state.keepAwake}
+        onKeepAwakeChange={(keepAwake) =>
+          dispatch({ type: 'SET_KEEP_AWAKE', keepAwake })
+        }
         onReset={() => dispatch({ type: 'RESET' })}
         onNewGame={() => dispatch({ type: 'NEW_GAME' })}
         onSideSeatChange={(sideSeat) =>

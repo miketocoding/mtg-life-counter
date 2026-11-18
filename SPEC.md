@@ -51,9 +51,13 @@ Stack is Vite, React, TypeScript. Hosted on GitHub Pages at /mtg-life-counter/.
 - A small gold button in the center of the screen opens a parchment menu
   with Reset (same players and starting life) and New Game (back to setup).
 - Both require confirmation.
+- Below the actions, a "Keep screen awake" switch, on by default and saved
+  with the game. Its note reads "Sleeps after 5 min untouched" when on and
+  "Uses your phone's sleep setting" when off.
 
 ## Behavior
-- Keep the screen awake during a game, but only while the app is in use:
+- When the keep-awake setting is on, keep the screen awake during a game,
+  but only while the app is in use:
   the page is visible, its window has focus, and it has been touched (or a
   key pressed) in the last 5 minutes. Release the lock as soon as any of
   these stops being true, so the device's own sleep settings apply (for

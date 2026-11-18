@@ -10,6 +10,8 @@ export interface GameState {
   startingLife: number
   sideSeat: SideSeat
   life: number[]
+  // Keep the screen awake during a game (see useWakeLock).
+  keepAwake: boolean
 }
 
 export type GameAction =
@@ -18,6 +20,7 @@ export type GameAction =
   | { type: 'RESET' }
   | { type: 'NEW_GAME' }
   | { type: 'SET_SIDE_SEAT'; sideSeat: SideSeat }
+  | { type: 'SET_KEEP_AWAKE'; keepAwake: boolean }
 
 export const PLAYER_COUNTS: readonly PlayerCount[] = [1, 2, 3, 4]
 export const LIFE_PRESETS: readonly number[] = [20, 25, 30, 40]
@@ -43,6 +46,7 @@ export const initialState: GameState = {
   startingLife: DEFAULT_STARTING_LIFE,
   sideSeat: 'left',
   life: freshLife(2, DEFAULT_STARTING_LIFE),
+  keepAwake: true,
 }
 
 export function gameReducer(state: GameState, action: GameAction): GameState {
@@ -80,5 +84,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       }
     case 'SET_SIDE_SEAT':
       return { ...state, sideSeat: action.sideSeat }
+    case 'SET_KEEP_AWAKE':
+      return { ...state, keepAwake: action.keepAwake }
   }
 }

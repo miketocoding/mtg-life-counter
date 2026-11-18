@@ -9,7 +9,7 @@ function App() {
   const [state, dispatch] = useReducer(gameReducer, undefined, loadState)
 
   useEffect(() => saveState(state), [state])
-  useWakeLock(state.screen === 'game')
+  useWakeLock(state.screen === 'game' && state.keepAwake)
 
   // Match the browser bar to the screen: the setup screen's --paper, or the
   // game screen's --bg.

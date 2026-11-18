@@ -18,7 +18,8 @@ function isGameState(value: unknown): value is GameState {
     (v.sideSeat === 'left' || v.sideSeat === 'right') &&
     Array.isArray(v.life) &&
     v.life.length === v.playerCount &&
-    v.life.every((n) => Number.isInteger(n))
+    v.life.every((n) => Number.isInteger(n)) &&
+    typeof v.keepAwake === 'boolean'
   )
 }
 
@@ -27,7 +28,12 @@ export function loadState(): GameState {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (raw === null) return initialState
     const parsed: unknown = JSON.parse(raw)
-    return isGameState(parsed) ? parsed : initialState
+    // State saved before the keep-awake setting existed has it on.
+    const withDefaults =
+      typeof parsed === 'object' && parsed !== null
+        ? { keepAwake: true, ...parsed }
+        : parsed
+    return isGameState(withDefaults) ? withDefaults : initialState
   } catch {
     return initialState
   }

@@ -7,6 +7,7 @@ const inGame: GameState = {
   startingLife: 40,
   sideSeat: 'left',
   life: [40, 40, 40, 40],
+  keepAwake: true,
 }
 
 describe('gameReducer', () => {
@@ -149,6 +150,16 @@ describe('gameReducer', () => {
       })
       expect(state.sideSeat).toBe('right')
       expect(state.life).toEqual([18, 7, 22])
+    })
+  })
+
+  describe('SET_KEEP_AWAKE', () => {
+    it('turns the setting off without touching the game', () => {
+      const state = gameReducer(inGame, {
+        type: 'SET_KEEP_AWAKE',
+        keepAwake: false,
+      })
+      expect(state).toEqual({ ...inGame, keepAwake: false })
     })
   })
 })

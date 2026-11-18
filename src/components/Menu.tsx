@@ -7,6 +7,8 @@ interface MenuProps {
   startingLife: number
   // Present only in 3-player games, where one player sits at the side.
   sideSeat?: SideSeat
+  keepAwake: boolean
+  onKeepAwakeChange: (keepAwake: boolean) => void
   onReset: () => void
   onNewGame: () => void
   onSideSeatChange: (sideSeat: SideSeat) => void
@@ -15,6 +17,8 @@ interface MenuProps {
 export function Menu({
   startingLife,
   sideSeat,
+  keepAwake,
+  onKeepAwakeChange,
   onReset,
   onNewGame,
   onSideSeatChange,
@@ -72,6 +76,23 @@ export function Menu({
                     edge
                   </button>
                 )}
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={keepAwake}
+                  className="setting"
+                  onClick={() => onKeepAwakeChange(!keepAwake)}
+                >
+                  <span className="setting__text">
+                    <span className="setting__label">Keep screen awake</span>
+                    <span className="setting__note">
+                      {keepAwake
+                        ? 'Sleeps after 5 min untouched'
+                        : "Uses your phone's sleep setting"}
+                    </span>
+                  </span>
+                  <span className="switch" aria-hidden="true" />
+                </button>
                 <button
                   type="button"
                   className="button button--quiet"

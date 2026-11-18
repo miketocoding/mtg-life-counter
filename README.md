@@ -12,16 +12,17 @@ See [SPEC.md](SPEC.md) for the full behaviour.
 - During a game the screen stays awake while the app is in front. After 5
   minutes untouched, or when another window or tab is in front, your
   device's normal sleep settings apply; the next touch keeps it awake again.
+  Turn this off with "Keep screen awake" in the menu.
 - The gold button in the centre of the screen (at the top with 1 player)
-  opens the menu (Reset, New Game and, with 3 players, which edge the side
-  player sits at).
+  opens the menu (Reset, New Game, the keep-awake switch and, with 3
+  players, which edge the side player sits at).
 
 ## Development
 
 ```sh
 npm install
 npm run dev      # http://localhost:5173/mtg-life-counter/
-npm test         # reducer unit tests (Vitest)
+npm test         # reducer and storage unit tests (Vitest)
 npm run lint
 npm run build    # type-check and build to dist/
 ```
