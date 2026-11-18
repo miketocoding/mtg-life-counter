@@ -31,6 +31,11 @@ export function SetupScreen({ state, dispatch }: SetupScreenProps) {
           if (valid) dispatch({ type: 'START_GAME', playerCount, startingLife })
         }}
       >
+        <div className="pips" aria-hidden="true">
+          {['w', 'u', 'b', 'r', 'g'].map((mana) => (
+            <span key={mana} className={`pips__pip pips__pip--${mana}`} />
+          ))}
+        </div>
         <h1 className="setup__title">Life Counter</h1>
 
         <fieldset className="field">
@@ -40,11 +45,19 @@ export function SetupScreen({ state, dispatch }: SetupScreenProps) {
               <button
                 key={count}
                 type="button"
-                className="choice"
+                className="choice choice--players"
                 aria-pressed={count === playerCount}
                 onClick={() => setPlayerCount(count)}
               >
                 {count}
+                <span className="seats" aria-hidden="true">
+                  {Array.from({ length: count }, (_, seat) => (
+                    <span
+                      key={seat}
+                      className={`seats__dot seats__dot--player-${seat + 1}`}
+                    />
+                  ))}
+                </span>
               </button>
             ))}
           </div>

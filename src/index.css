@@ -9,7 +9,13 @@
   --text: #f4f4f5;
   --text-muted: #a1a1aa;
   --accent: #f4f4f5;
+  --on-accent: #000;
   --danger: #f87171;
+  --mana-w: #f8f1c8;
+  --mana-u: #b5d8ef;
+  --mana-b: #cbc2bd;
+  --mana-r: #f2b096;
+  --mana-g: #a9d4b4;
   --menu-size: 11vmin;
 
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -320,7 +326,7 @@ button {
 }
 .button--primary {
   background: var(--accent);
-  color: #000;
+  color: var(--on-accent);
 }
 .button:disabled {
   opacity: 0.35;
@@ -329,7 +335,19 @@ button {
 
 /* ---------- Setup ---------- */
 
+/* The setup screen is parchment and gold, like a white card's frame; the
+   game screen and its menu stay dark. */
 .setup {
+  --bg: #f5ecd7;
+  --surface: #ebdfc2;
+  --surface-raised: #fffaf0;
+  --text: #2a2118;
+  --text-muted: #6b5c48;
+  --title: #5a3f17;
+  --accent: #8f6421;
+  --on-accent: #fffaf0;
+  --danger: #b42318;
+
   position: fixed;
   inset: 0;
   display: flex;
@@ -337,6 +355,38 @@ button {
   justify-content: center;
   padding: max(5vmin, env(safe-area-inset-top)) 6vmin
     max(5vmin, env(safe-area-inset-bottom));
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Decorative row of the five mana colours above the title. */
+.pips {
+  display: flex;
+  justify-content: center;
+  gap: min(2vmin, 1.3dvh);
+  /* Sit closer to the title than the form's gap between sections. */
+  margin-bottom: calc(min(5vmin, 3.2dvh) * -0.5);
+}
+.pips__pip {
+  width: min(4vmin, 2.6dvh);
+  height: min(4vmin, 2.6dvh);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 0.3vmin rgb(0 0 0 / 0.18);
+}
+.pips__pip--w {
+  background: var(--mana-w);
+}
+.pips__pip--u {
+  background: var(--mana-u);
+}
+.pips__pip--b {
+  background: var(--mana-b);
+}
+.pips__pip--r {
+  background: var(--mana-r);
+}
+.pips__pip--g {
+  background: var(--mana-g);
 }
 
 .setup__form {
@@ -348,10 +398,13 @@ button {
 
 .setup__title {
   margin: 0;
+  /* Cinzel stands in for Beleren, the card-name face, which isn't free. */
+  font-family: Cinzel, Georgia, 'Times New Roman', serif;
   font-size: min(9vmin, 6dvh);
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.03em;
   text-align: center;
+  color: var(--title);
 }
 
 .field {
@@ -397,6 +450,12 @@ button {
   font-variant-numeric: tabular-nums;
   cursor: pointer;
 }
+.choice--players {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: min(1.6vmin, 1dvh);
+}
 .choice--text {
   font-size: min(4.4vmin, 3dvh);
   font-weight: 600;
@@ -404,6 +463,30 @@ button {
 .choice[aria-pressed='true'] {
   border-color: var(--accent);
   background: var(--surface-raised);
+}
+
+/* One dot per seat, in that player's panel colour. */
+.seats {
+  display: flex;
+  gap: min(1.2vmin, 0.8dvh);
+}
+.seats__dot {
+  width: min(2.8vmin, 1.8dvh);
+  height: min(2.8vmin, 1.8dvh);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 0.3vmin rgb(0 0 0 / 0.2);
+}
+.seats__dot--player-1 {
+  background: var(--red);
+}
+.seats__dot--player-2 {
+  background: var(--blue);
+}
+.seats__dot--player-3 {
+  background: var(--yellow);
+}
+.seats__dot--player-4 {
+  background: var(--green);
 }
 
 .custom {

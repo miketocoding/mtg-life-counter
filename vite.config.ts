@@ -10,6 +10,8 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
+      // Precache the bundled title font too, so it works offline.
+      workbox: { globPatterns: ['**/*.{js,css,html,woff2}'] },
       manifest: {
         name: 'MTG Life Counter',
         short_name: 'Life Counter',
