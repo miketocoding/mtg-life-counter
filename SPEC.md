@@ -53,9 +53,14 @@ Stack is Vite, React, TypeScript. Hosted on GitHub Pages at /mtg-life-counter/.
 - Both require confirmation.
 
 ## Behavior
-- Keep the screen awake with the Screen Wake Lock API. Re-acquire the lock
-  on visibilitychange. Fall back to NoSleep.js where the API is
-  unavailable or refused.
+- Keep the screen awake during a game, but only while the app is in use:
+  the page is visible, its window has focus, and it has been touched (or a
+  key pressed) in the last 5 minutes. Release the lock as soon as any of
+  these stops being true, so the device's own sleep settings apply (for
+  example when another tab or window is in front, even if the app's window
+  is still partly on screen, or when a game is left untouched). Re-acquire
+  it on return or on the next touch. Use the Screen Wake Lock API, falling
+  back to NoSleep.js where it is unavailable or refused.
 - Persist game state and settings in localStorage. Restore on load.
 - Disable double-tap zoom, pinch zoom, pull-to-refresh, text selection,
   and the long-press context menu.
